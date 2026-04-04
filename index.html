@@ -1,10 +1,371 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Mi Primera GitHub Page</title>
-  </head>
-  <body>
-    <h1>¡Hola, mundo!</h1>
-    <p>Esta es mi nueva página web alojada en GitHub Pages.</p>
-  </body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambiente Integrado de Aprendizaje | Uniandes</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Variables de color para el Tema Oscuro (Dark Mode) */
+        :root {
+            --fondo-principal: #0f172a; 
+            --fondo-tarjetas: #1e293b; 
+            --dorado-uniandes: #f0ab00; 
+            --dorado-hover: #d19500;
+            --texto-principal: #f3f4f6; 
+            --texto-secundario: #9ca3af; 
+            --enlaces: #818cf8; 
+        }
+
+        /* Desplazamiento suave y ajuste para el menú fijo */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 140px; 
+        }
+
+        /* Estilos Generales */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            color: var(--texto-principal); 
+            background-color: var(--fondo-principal);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Barra Superior de Navegación */
+        header { 
+            background-color: rgba(15, 23, 42, 0.85); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            padding: 20px 5% 15px 5%; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .header-top { display: flex; align-items: center; }
+        .header-top img { height: 55px; margin-right: 20px; }
+        .header-top h1 { margin: 0; font-size: 26px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px; }
+
+        /* Menú de Navegación */
+        .navbar { display: flex; gap: 30px; flex-wrap: wrap; }
+        .navbar a {
+            text-decoration: none; color: var(--texto-secundario); font-weight: 500;
+            font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;
+            position: relative; padding-bottom: 5px; transition: color 0.3s ease;
+        }
+        .navbar a:hover { color: #ffffff; }
+        .navbar a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: 0; left: 0; background-color: var(--dorado-uniandes); transition: width 0.3s ease;
+        }
+        .navbar a:hover::after { width: 100%; }
+
+        /* Formato estándar para secciones */
+        section { padding: 60px 10%; }
+        section h2 { 
+            font-size: 32px; font-weight: 700; color: #ffffff;
+            margin-bottom: 30px; display: inline-block; position: relative;
+        }
+        section h2::after {
+            content: ''; position: absolute; left: 0; bottom: -10px;
+            width: 60%; height: 4px; background-color: var(--dorado-uniandes); border-radius: 2px;
+        }
+        
+        .section-description {
+            font-size: 16px; color: var(--texto-secundario); max-width: 900px;
+            margin-bottom: 40px; line-height: 1.6;
+        }
+
+        /* 1. Cajas Interactivas (Videos) */
+        .areas-container { 
+            display: flex; gap: 0; justify-content: space-between; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5); 
+        }
+        .card { 
+            flex: 1; position: relative; border-radius: 0; overflow: hidden; 
+            aspect-ratio: 1 / 1; background-color: #000; border-right: 1px solid rgba(255,255,255,0.05); 
+        }
+        .card:last-child { border-right: none; }
+        .card video { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.6; }
+        .card::before {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.8)); z-index: 1; 
+        }
+        
+        /* --- TÍTULOS PROTAGONISTAS --- */
+        .card-title { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            font-weight: 800; 
+            font-size: 40px; 
+            text-transform: uppercase; letter-spacing: 2px; 
+            text-align: center; width: 90%; margin: 0; color: #ffffff; z-index: 2; 
+            text-shadow: 0 6px 20px rgba(0,0,0,0.9), 0 2px 5px rgba(0,0,0,0.8); 
+            transition: opacity 0.4s ease, transform 0.4s ease; 
+        }
+        
+        .card:hover .card-title { opacity: 0; transform: translate(-50%, -60%); }
+        .overlay { 
+            position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(15, 23, 42, 0.9); 
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); overflow: hidden; width: 100%; height: 0; 
+            transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1); z-index: 3; 
+        }
+        .card:hover .overlay { height: 100%; }
+        .overlay-text { 
+            color: var(--texto-principal); padding: 30px; text-align: center; font-size: 16px; 
+            line-height: 1.7; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; 
+        }
+
+        /* 2. Sección Uso del Laboratorio */
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .asset-card {
+            background: var(--fondo-tarjetas);
+            padding: 30px 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .asset-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.15);
+        }
+        .asset-card h3 {
+            color: #ffffff;
+            font-size: 20px;
+            margin: 0 0 15px 0;
+            font-weight: 600;
+        }
+        .asset-card p {
+            color: var(--texto-secundario);
+            font-size: 14px;
+            margin: 0 0 25px 0;
+            flex-grow: 1; 
+        }
+        .btn-reserva {
+            display: inline-block;
+            background-color: var(--dorado-uniandes);
+            color: #000000;
+            text-align: center;
+            padding: 12px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-reserva:hover {
+            background-color: var(--dorado-hover);
+            transform: scale(1.02);
+        }
+
+        /* 3. Sección Nuestra Gente (MODIFICADA PARA LISTA VERTICAL) */
+        .people-container { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 30px; 
+        }
+        .person-card { 
+            display: flex; gap: 25px; align-items: center; background: var(--fondo-tarjetas); 
+            padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+            border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%; /* Asegura que tome todo el ancho */
+            box-sizing: border-box; /* Previene que el padding rompa el ancho total */
+        }
+        .person-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); }
+        .person-pic { 
+            width: 140px; height: 140px; border-radius: 50%; background-color: #334155; 
+            object-fit: cover; flex-shrink: 0; border: 3px solid rgba(255,255,255,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* Contenedor de la información para que se distribuya mejor en formato horizontal */
+        .person-info {
+            flex-grow: 1;
+        }
+        
+        .person-info h3 { margin: 0 0 5px 0; color: #ffffff; font-size: 22px; font-weight: 700; }
+        .person-info h4 { margin: 0 0 15px 0; color: var(--dorado-uniandes); font-weight: 500; font-size: 15px;}
+        .person-info p { margin: 0; line-height: 1.6; color: var(--texto-secundario); font-size: 14px;}
+        .person-email { margin: 15px 0 0 0; font-size: 14px; color: var(--texto-principal); }
+        .person-email a { color: var(--enlaces); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
+        .person-email a:hover { color: var(--dorado-uniandes); text-decoration: underline; }
+
+        /* Ajustes Mobile */
+        @media (max-width: 768px) {
+            .header-top { flex-direction: column; text-align: center; }
+            .header-top img { margin: 0 0 10px 0; }
+            .navbar { justify-content: center; }
+            .areas-container { flex-direction: column; }
+            .card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+            .card-title { font-size: 28px; } 
+            .person-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-top">
+            <img src="Oficial_Images/LogoAIA.jpg" alt="Logo de Ingeniería Industrial">
+            <h1>Ambiente Integrado de Aprendizaje</h1>
+        </div>
+        
+        <nav class="navbar">
+            <a href="#proyectos">Proyectos</a>
+            <a href="#uso-laboratorio">Uso del laboratorio</a>
+            <a href="#nuestra-gente">Nuestra gente</a>
+            <a href="#demos">Demos</a>
+            <a href="#investigacion">Investigación</a>
+            <a href="#capacitaciones">Capacitaciones</a>
+        </nav>
+    </header>
+
+    <section id="proyectos">
+        <div class="areas-container">
+            <div class="card">
+                <video autoplay loop muted playsinline>
+                    <source src="Videos_MainPage/video_impresion3d.mp4" type="video/mp4">
+                </video>
+                <p class="card-title">Impresión 3D</p>
+                <div class="overlay">
+                    <div class="overlay-text">
+                        Desarrollo de proyectos aplicados a la manufactura aditiva. Investigación en nuevos materiales y enfoques pedagógicos.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <video autoplay loop muted playsinline>
+                    <source src="Videos_MainPage/Video_Robot.mp4" type="video/mp4">
+                </video>
+                <p class="card-title">Robótica</p>
+                <div class="overlay">
+                    <div class="overlay-text">
+                        Diseño, programación y control de sistemas robóticos aplicados a la automatización de procesos logísticos.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <video autoplay loop muted playsinline>
+                    <source src="Videos_MainPage/Video_IASistemasCiberFisicos.mp4" type="video/mp4">
+                </video>
+                <p class="card-title">IA en Sistemas Ciberfísicos</p>
+                <div class="overlay">
+                    <div class="overlay-text">
+                        Implementación de modelos de análisis de datos, inteligencia artificial y algoritmos de optimización para simulación de sistemas u operaciones industriales reales.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="uso-laboratorio">
+        <h2>Uso del Laboratorio</h2>
+        <p class="section-description">
+            Como estudiante de pregrado o posgrado de la Universidad de los Andes, tienes acceso garantizado a los activos tecnológicos del laboratorio para el desarrollo de tus proyectos. A través de nuestro sistema, puedes reservar el uso del siguiente equipamiento de vanguardia:
+        </p>
+
+        <div class="assets-grid">
+            <div class="asset-card">
+                <h3>Cómputo de Alto Rendimiento</h3>
+                <p>Estaciones de trabajo diseñadas para procesar simulaciones complejas, modelado 3D y algoritmos de optimización.</p>
+                <a href="https://outlook.office.com/book/ServiciodereservadeequiposdelAIA@uniandes.onmicrosoft.com/s/BRoPo4ew7U-iPo3kA8K_7g2?ismsaljsauthenabled" target="_blank" class="btn-reserva">Reservar Equipo</a>
+            </div>
+
+            <div class="asset-card">
+                <h3>Brazos Robóticos</h3>
+                <p>Sistemas colaborativos Universal Robots (modelos UR3 y UR30) para la integración y pruebas de automatización.</p>
+                <a href="https://outlook.office.com/book/ServiciodereservadeequiposdelAIA@uniandes.onmicrosoft.com/s/ZRsQf4GbTkqRZRGDBrn7rQ2?ismsaljsauthenabled" target="_blank" class="btn-reserva">Reservar UR3 / UR30</a>
+            </div>
+
+            <div class="asset-card">
+                <h3>Realidad Aumentada</h3>
+                <p>Gafas Microsoft HoloLens 2, ideales para interactuar con hologramas y desarrollar proyectos en entornos mixtos.</p>
+                <a href="https://outlook.office.com/book/ServiciodereservadeequiposdelAIA@uniandes.onmicrosoft.com/s/lj3ByoGkOEGEJ5ngOe0-zA2?ismsaljsauthenabled" target="_blank" class="btn-reserva">Reservar HoloLens 2</a>
+            </div>
+
+            <div class="asset-card">
+                <h3>Impresión 3D</h3>
+                <p>Sistemas de manufactura aditiva avanzada Bambulab (modelos H2D y X1 Carbon) para prototipado rápido y preciso.</p>
+                <a href="https://outlook.office.com/book/ServiciodereservadeequiposdelAIA@uniandes.onmicrosoft.com/s/NX-PcvJX4E6l-NHRJQCd2Q2?ismsaljsauthenabled" target="_blank" class="btn-reserva">Reservar Impresora</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="nuestra-gente">
+        <h2>Nuestra gente</h2>
+        <div class="people-container">
+            
+            <div class="person-card">
+                <img src="fotos_integrantes/TORRES_CARLOS.jpeg" alt="Foto CARLOSTORRES" class="person-pic">
+                <div class="person-info">
+                    <h3>Carlos Felipe Torres Usma</h3>
+                    <h4>Asistente graduado de docencia e investigación</h4>
+                    <p><strong>Áreas de interés y habilidades:</strong> Industria 4.0 bajo la aplicación de inteligencia artificial, robótica y manufactura aditiva dentro de las operaciones industriales desde el diseño de productos hasta la producción y logística.</p>
+                    <p class="person-email"><strong>Contacto:</strong> <a href="mailto:c.torresu@uniandes.edu.co">c.torresu@uniandes.edu.co</a></p>
+                </div>
+            </div>
+
+            <div class="person-card">
+                <img src="fotos_integrantes/integrante-2.jpg" alt="Foto JULIANLEON" class="person-pic">
+                <div class="person-info">
+                    <h3>Julian León</h3>
+                    <h4>Monitor de investigación</h4>
+                    <p><strong>Áreas de interés y habilidades:</strong> Logística y optimización aplicando tecnología de realidad aumentada para apoyar al operario dentro de tareas de ubicación de cajas en bodega (knapsack problem).</p>
+                    <p class="person-email"><strong>Contacto:</strong> <a href="mailto:eleonc@uniandes.edu.co">eleonc@uniandes.edu.co</a></p>
+                </div>
+            </div>
+
+            <div class="person-card">
+                <img src="fotos_integrantes/ARCILA_FELIPE.jpeg" alt="Foto FELIPEARCILA" class="person-pic">
+                <div class="person-info">
+                    <h3>Felipe Arcila</h3>
+                    <h4>Monitor de pregrado</h4>
+                    <p><strong>Áreas de interés y habilidades:</strong> Integración de tecnologías de impresión 3D, diseño mecánico y gestión de plataformas de información.</p>
+                    <p class="person-email"><strong>Contacto:</strong> <a href="mailto:f.arcila@uniandes.edu.co">f.arcila@uniandes.edu.co</a></p>
+                </div>
+            </div>
+
+            <div class="person-card">
+                <img src="fotos_integrantes/integrante-4.jpg" alt="Foto LUCASMUNOZ" class="person-pic">
+                <div class="person-info">
+                    <h3>Lucas Muñoz</h3>
+                    <h4>Monitor de pregrado</h4>
+                    <p><strong>Áreas de interés y habilidades:</strong> Análisis financiero en ingeniería, inteligencia de negocios e integración de sistemas robóticos.</p>
+                    <p class="person-email"><strong>Contacto:</strong> <a href="mailto:l.munozc@uniandes.edu.co">l.munozc@uniandes.edu.co</a></p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="demos">
+        <h2>Demos</h2>
+    </section>
+
+    <section id="investigacion">
+        <h2>Investigación</h2>
+    </section>
+
+    <section id="capacitaciones">
+        <h2>Capacitaciones</h2>
+    </section>
+
+</body>
 </html>
