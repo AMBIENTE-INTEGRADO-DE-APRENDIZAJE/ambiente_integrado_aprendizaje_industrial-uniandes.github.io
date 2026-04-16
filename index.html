@@ -59,7 +59,7 @@
         .header-top h1 { margin: 0; font-size: 26px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px; }
 
         /* Menú de Navegación */
-        .navbar { display: flex; gap: 30px; flex-wrap: wrap; }
+        .navbar { display: flex; gap: 30px; flex-wrap: wrap; align-items: center; }
         .navbar a {
             text-decoration: none; color: var(--texto-secundario); font-weight: 500;
             font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;
@@ -164,7 +164,7 @@
         .person-email a { color: var(--enlaces); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
         .person-email a:hover { color: var(--dorado-uniandes); text-decoration: underline; }
 
-        /* 4. Sección Investigación (NUEVO: Dropdowns y Tarjetas de Proyecto) */
+        /* 4. Sección Investigación */
         .research-dropdown {
             background-color: var(--fondo-tarjetas);
             border: 1px solid rgba(255,255,255,0.05);
@@ -180,7 +180,7 @@
             font-weight: 700;
             color: var(--dorado-uniandes);
             cursor: pointer;
-            list-style: none; /* Quita el triángulo por defecto */
+            list-style: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -189,10 +189,9 @@
         }
         
         .research-summary::-webkit-details-marker {
-            display: none; /* Para navegadores basados en webkit */
+            display: none;
         }
         
-        /* Icono de + y - personalizado para el desplegable */
         .research-summary::after {
             content: '+';
             font-size: 30px;
@@ -202,7 +201,7 @@
         }
         
         details[open] .research-summary::after {
-            transform: rotate(45deg); /* Gira el + para que parezca una x */
+            transform: rotate(45deg);
         }
         
         details[open] .research-summary {
@@ -212,7 +211,7 @@
 
         .projects-container {
             display: flex;
-            flex-direction: column; /* Garantiza la organización vertical de los proyectos */
+            flex-direction: column;
             gap: 40px;
             padding: 40px 30px;
             background-color: rgba(15, 23, 42, 0.3);
@@ -227,7 +226,7 @@
             border: 1px solid rgba(255,255,255,0.05);
             border-radius: 12px;
             padding: 40px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.2); /* Sombra interior para darle profundidad */
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
             width: 100%;
             box-sizing: border-box;
         }
@@ -251,15 +250,14 @@
 
         .project-media {
             width: 100%;
-            max-width: 900px; /* Evita que el video sea excesivamente gigante en pantallas grandes */
-            aspect-ratio: 16 / 9; /* Mantiene un formato panorámico estándar */
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
             background-color: #000;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* Soporte tanto para imágenes como para videos dentro del contenedor multimedia */
         .project-media img, .project-media video {
             width: 100%;
             height: 100%;
@@ -296,6 +294,7 @@
             <a href="#demos">Demos</a>
             <a href="#investigacion">Investigación</a>
             <a href="#capacitaciones">Capacitaciones</a>
+            <a href="eventos.html">Eventos</a>
         </nav>
     </header>
 
@@ -439,14 +438,13 @@
             
             <div class="projects-container">
                 <div class="project-card">
-                    <h3 class="project-title">Optimización de SLAP para Jerónimo Martins</h3>
-                    <p class="project-desc">Desarrollo de un modelo de optimización enfocado en el Storage Location Assignment Problem (SLAP) para mejorar los tiempos operativos y de almacenamiento en las operaciones de la empresa Jerónimo Martins (ARA).</p>
+                    <h3 class="project-title">Optimización de SLAP para el Sector Retail</h3>
+                    <p class="project-desc">Desarrollo de un modelo de optimización enfocado en el Storage Location Assignment Problem (SLAP) para mejorar los tiempos operativos y de almacenamiento en las operaciones de una importante empresa del sector retail.</p>
                     <div class="project-media">
                         <img src="https://via.placeholder.com/900x500?text=Imagen+del+Proyecto+Posgrado" alt="Imagen Proyecto">
                     </div>
                 </div>
-
-                </div>
+            </div>
         </details>
 
         <details class="research-dropdown">
@@ -462,8 +460,7 @@
                         </video>
                     </div>
                 </div>
-                
-                </div>
+            </div>
         </details>
     </section>
 
