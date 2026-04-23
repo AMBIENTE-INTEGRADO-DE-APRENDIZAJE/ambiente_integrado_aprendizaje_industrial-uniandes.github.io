@@ -42,7 +42,7 @@
         }
 
         .header-left { display: flex; align-items: center; gap: 15px; }
-        .header-left img { height: 40px; }
+        .header-left img { height: 70px; }
         .header-left h1 { margin: 0; font-size: 18px; font-weight: 600; color: #fff; }
 
         .btn-volver {
@@ -93,9 +93,10 @@
             border-color: rgba(255,255,255,0.2);
         }
 
+        /* --- IMAGEN DE LA TARJETA (Agrandada de 180px a 240px) --- */
         .card-image {
             width: 100%;
-            height: 180px;
+            height: 240px; 
             object-fit: cover;
             border-bottom: 1px solid var(--linea-divisoria);
         }
@@ -157,8 +158,9 @@
         }
         .modal-close:hover { background: var(--dorado-uniandes); color: #000; }
 
+        /* --- IMAGEN DEL MODAL (Agrandada de 300px a 450px) --- */
         .modal-image {
-            width: 100%; height: 300px; object-fit: cover;
+            width: 100%; height: 450px; object-fit: cover;
             border-bottom: 1px solid var(--linea-divisoria);
         }
 
@@ -182,7 +184,10 @@
             header { flex-direction: column; gap: 15px; padding: 20px 5%; }
             .header-left { flex-direction: column; text-align: center; }
             .header-left img { margin: 0 0 10px 0; }
-            .modal-image { height: 200px; }
+            
+            /* --- IMAGEN DEL MODAL EN MÓVILES (Agrandada de 200px a 280px) --- */
+            .modal-image { height: 280px; } 
+            
             .modal-body { padding: 25px; }
             .modal-title { font-size: 24px; }
             .modal-meta { flex-direction: column; align-items: flex-start; gap: 10px; }
